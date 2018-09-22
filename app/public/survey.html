@@ -53,43 +53,43 @@
                 <input type="text" class="form-control" id="urlPhoto">
               </div>
               <div class="form-group">
-                <label for="reserve-email">Question 1 </label>
+                <label for="Question 1">Question 1 </label>
                 <input type="text" class="form-control" id="q1">
               </div>
               <div class="form-group">
-                <label for="reserve-email">Question 2 </label>
+                <label for="Question 2">Question 2 </label>
                 <input type="text" class="form-control" id="q2">
               </div>
               <div class="form-group">
-                <label for="reserve-email">Question 3 </label>
+                <label for="Question 3">Question 3 </label>
                 <input type="text" class="form-control" id="q3">
               </div>
               <div class="form-group">
-                <label for="reserve-email">Question 4 </label>
+                <label for="Question 4">Question 4 </label>
                 <input type="text" class="form-control" id="q4">
               </div>
               <div class="form-group">
-                <label for="reserve-email">Question 5 </label>
+                <label for="Question 5">Question 5 </label>
                 <input type="text" class="form-control" id="q5">
               </div>
               <div class="form-group">
-                <label for="reserve-email">Question 6 </label>
+                <label for="Question 6">Question 6 </label>
                 <input type="text" class="form-control" id="q6">
               </div>
               <div class="form-group">
-                <label for="reserve-email">Question 7 </label>
+                <label for="Question 7">Question 7 </label>
                 <input type="text" class="form-control" id="q7">
               </div>
               <div class="form-group">
-                <label for="reserve-email">Question 8 </label>
+                <label for="Question 8">Question 8 </label>
                 <input type="text" class="form-control" id="q8">
               </div>
               <div class="form-group">
-                <label for="reserve-email">Question 9 </label>
+                <label for="Question 9">Question 9 </label>
                 <input type="text" class="form-control" id="q9">
               </div>
               <div class="form-group">
-                <label for="reserve-email">Question 10 </label>
+                <label for="Question 10">Question 10 </label>
                 <input type="text" class="form-control" id="q10">
               </div>
 
@@ -99,6 +99,34 @@
         </div>
       </div>
     </div>
+
+
+  <!-- The Modal -->
+  <div class="modal" id="friendResult">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Best Match</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <p id="friendName"></p>
+          <img id="friendPhoto" src="">
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
 
 
     <footer class="footer">
@@ -124,21 +152,31 @@
   $(".submit").on("click", function (event) {
     event.preventDefault();
 
+    questionsComplete = true
+
     var scoreResults = []
+    // grab the scores to the questions input with id1 to id10
     for (let i = 1; i<11; i++) {
       idName = "#q"+i
-      scoreResults.push( $(idName).val().trim())
+      answer = $(idName).val().trim()
+      if (answer === "") {
+        alert("Incomplete!")
+        break
+      } else {
+        scoreResults.push(answer)
+      }
     }
     console.log(scoreResults)
 
-    // Here we grab the form elements
+    // Here we grab the form elements values
+    // consolidate stuff on the scores variable
     var info = {
       name: $("#name").val().trim(),
       photo: $("#urlPhoto").val().trim(),
       scores: scoreResults
     };
 
-    console.log(info);
+    // console.log(info);
 
     // This line is the magic. It"s very similar to the standard ajax function we used.
     // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
@@ -147,22 +185,18 @@
 
     $.post("/api/friends", info,
       function (data) {
-
-        // If a table is available... tell user they are booked.
-        if (data) {
-          alert("Yay! You are officially booked!");
-        }
-
-        // If a table is available... tell user they on the waiting list.
-        else {
-          alert("Sorry you are on the wait list");
-        }
-
         // Clear the form when submitting
-        $("#reserve-name").val("");
-        $("#reserve-phone").val("");
-        $("#reserve-email").val("");
-        $("#reserve-unique-id").val("");
+        $("#name").val("");
+        $("#urlPhoto").val("");
+
+        // analyze resulting data
+        console.log("-------> ",data['result'])
+        if (data['result']== true) {
+          $('#friendResult').modal('show');
+        }  else {
+          alert("Sorry you are friendless");
+        }
+
 
       });
 
