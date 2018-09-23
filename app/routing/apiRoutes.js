@@ -14,21 +14,35 @@ module.exports = function (app) {
     });
 
 
+    // I am using get to reset the list, being lazy, this should be update I believe
+    // if I am faithful the the REST concepts
+
+    app.get("/api/reset", function (req, res) {
+        // resets the friend Data to the original data set
+        friendData = [
+            {
+                name: "hot guy",
+                photo: "https://media2.giphy.com/media/3ov9jVedETgcdCNjHi/giphy.gif",
+                scores: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            },
+            {
+                name: "hot girl",
+                photo: "https://media.giphy.com/media/njqtXo391qcVy/giphy.gif",
+                scores: [5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
+            }
+        ]
+        res.json(friendData);
+    });
 
     // API POST Requests
 
     app.post("/api/friends", function (req, res) {
-        // Note the code here. Our "server" will respond to requests and let users know if they have a table or not.
-        // It will do this by sending out the value "true" have a table
-        // req.body is available since we're using the body-parser middleware
-        // friendData.push(req.body)
-        //console.log(req.body)
-
+        // find a friend and return results
         findFriend(req.body, friendData, res)
-
-        
     });
-};  
+
+
+};
 
 function findFriend(newFriend, friendList, res) {
     // new friend is the the one that entered on the form
@@ -40,14 +54,14 @@ function findFriend(newFriend, friendList, res) {
 
     // loop through each name on current list
     newFriendScoreList = newFriend['scores']
-    for (let i = 0; i<friendList.length; i++) {
-        
+    for (let i = 0; i < friendList.length; i++) {
+
         // potentail best 
         potentialScorelist = friendList[i]['scores']
 
         // calculate total score deviation 
         totalscore = 0
-        for (let j=0; j<potentialScorelist.length; j++) {
+        for (let j = 0; j < potentialScorelist.length; j++) {
             totalscore += Math.abs(newFriendScoreList[j] - potentialScorelist[j])
         }
 

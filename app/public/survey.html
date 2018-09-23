@@ -3,12 +3,14 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>QUESTION PAGE</title>
+  <title>Friend Finder</title>
 
   <!-- Latest compiled and minified CSS & JS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+  <!-- Font Awesome Glyphicons -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+    crossorigin="anonymous">
 </head>
 
 <body>
@@ -21,7 +23,7 @@
 
         <div class="card">
           <div class="card-header">
-            Table Reservation
+            <h1> Survey Questions</h1>
           </div>
           <div class="card-body">
             <form role="form">
@@ -33,6 +35,7 @@
                 <h3>Photo URL</h3>
                 <input type="text" class="form-control" id="urlPhoto">
               </div>
+              <hr>
               <div class="form-group">
                 <h3><strong>Question 1</strong></h3>
                 <h4>Your mind is always buzzing with unexplored ideas and plans.</h4>
@@ -47,7 +50,7 @@
               </div>
               <div class="form-group">
                 <h3><strong>Question 2</strong></h3>
-                <h4>Your mind is always buzzing with unexplored ideas and plans.</h4>
+                <h4>Generally speaking, you rely more on your experience than your imagination.</h4>
                 <select class="chosen-select" id="q2">
                   <option value=""></option>
                   <option value="1">1 (Strongly Disagree)</option>
@@ -59,7 +62,7 @@
               </div>
               <div class="form-group">
                 <h3><strong>Question 3</strong></h3>
-                <h4>Your mind is always buzzing with unexplored ideas and plans.</h4>
+                <h4>You find it easy to stay relaxed and focused even when there is some pressure.</h4>
                 <select class="chosen-select" id="q3">
                   <option value=""></option>
                   <option value="1">1 (Strongly Disagree)</option>
@@ -71,7 +74,7 @@
               </div>
               <div class="form-group">
                 <h3><strong>Question 4</strong></h3>
-                <h4>Your mind is always buzzing with unexplored ideas and plans.</h4>
+                <h4>You rarely do something just out of sheer curiosity</h4>
                 <select class="chosen-select" id="q4">
                   <option value=""></option>
                   <option value="1">1 (Strongly Disagree)</option>
@@ -83,7 +86,7 @@
               </div>
               <div class="form-group">
                 <h3><strong>Question 5</strong></h3>
-                <h4>Your mind is always buzzing with unexplored ideas and plans.</h4>
+                <h4>People can rarely upset you.</h4>
                 <select class="chosen-select" id="q5">
                   <option value=""></option>
                   <option value="1">1 (Strongly Disagree)</option>
@@ -95,7 +98,7 @@
               </div>
               <div class="form-group">
                 <h3><strong>Question 6</strong></h3>
-                <h4>Your mind is always buzzing with unexplored ideas and plans.</h4>
+                <h4>It is often difficult for you to relate to other people’s feelings.</h4>
                 <select class="chosen-select" id="q6">
                   <option value=""></option>
                   <option value="1">1 (Strongly Disagree)</option>
@@ -107,7 +110,7 @@
               </div>
               <div class="form-group">
                 <h3><strong>Question 7</strong></h3>
-                <h4>Your mind is always buzzing with unexplored ideas and plans.</h4>
+                <h4>In a discussion, truth should be more important than people’s sensitivities.</h4>
                 <select class="chosen-select" id="q7">
                   <option value=""></option>
                   <option value="1">1 (Strongly Disagree)</option>
@@ -119,7 +122,7 @@
               </div>
               <div class="form-group">
                 <h3><strong>Question 8</strong></h3>
-                <h4>Your mind is always buzzing with unexplored ideas and plans.</h4>
+                <h4>You rarely get carried away by fantasies and ideas.</h4>
                 <select class="chosen-select" id="q8">
                   <option value=""></option>
                   <option value="1">1 (Strongly Disagree)</option>
@@ -131,7 +134,8 @@
               </div>
               <div class="form-group">
                 <h3><strong>Question 9</strong></h3>
-                <h4>Your mind is always buzzing with unexplored ideas and plans.</h4>
+                <h4>You think that everyone’s views should be respected regardless of whether they are supported by
+                  facts or not.</h4>
                 <select class="chosen-select" id="q9">
                   <option value=""></option>
                   <option value="1">1 (Strongly Disagree)</option>
@@ -143,7 +147,7 @@
               </div>
               <div class="form-group">
                 <h3><strong>Question 10</strong></h3>
-                <h4>Your mind is always buzzing with unexplored ideas and plans.</h4>
+                <h4>You feel more energetic after spending time with a group of people.</h4>
                 <select class="chosen-select" id="q10">
                   <option value=""></option>
                   <option value="1">1 (Strongly Disagree)</option>
@@ -154,8 +158,12 @@
                 </select>
               </div>
 
+              <hr>
+              <div>
+                <button type="submit" class="btn btn-block btn-primary submit"><i class="fas fa-check-circle"></i>
+                  Submit</button>
+              </div>
 
-              <button type="submit" class="btn btn-primary submit">Submit</button>
             </form>
           </div>
         </div>
@@ -193,8 +201,7 @@
 
     <footer class="footer">
       <div class="container">
-        <p>
-          <a href="/api/friends">API Friends Link</a> |
+        <a href="/api/friends">API Friends List</a> | <a href="/api/reset">API Friends Reset List</a>
       </div>
     </footer>
 
@@ -219,13 +226,16 @@
     questionsComplete = true
 
     var scoreResults = []
-    // grab the scores to the questions input with id1 to id10
-    // check if answer is incomplete
+
+    // grab the resultsto the questions input with id1 to id10
+
+    // check if answer is incomplete, if incomplete, break out of loop and mark it
+    // questionsComplete as false
     for (let i = 1; i < 11; i++) {
       idName = "#q" + i
       answer = $(idName).val().trim()
       if (answer === "") {
-        questionComplete = false
+        questionsComplete = false
         break
       } else {
         scoreResults.push(answer)
@@ -233,7 +243,8 @@
     }
     console.log(scoreResults)
 
-    // check if answers are incomplete
+    // okay, so they finished all the questions, but did they remember to fill out the 
+    // their name and photo URL?  If not, mark questionsComplete as false
     if (($("#name").val().trim()) == "" || ($("#urlPhoto").val().trim() == "")) {
       questionsComplete = false;
     }
@@ -242,10 +253,12 @@
     // check if questions are complete
 
     if (questionsComplete == false) {
-      alert("Incomplete")
+      alert("Please complete all questions before continuing")
     } else {
-      // Here we grab the form elements values
-      // consolidate stuff on the scores variable
+      // okay.  So it's complete
+      // let's put together the data in a nice object that 
+      // matches the object list we have for the data
+      // and post it there!  
       var info = {
         name: $("#name").val().trim(),
         photo: $("#urlPhoto").val().trim(),
@@ -254,31 +267,40 @@
 
       console.log(info);
 
-      // This line is the magic. It"s very similar to the standard ajax function we used.
-      // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
-      // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
-      // depending on if a tables is available or not.
+      // ajax post request to find a matching friend
+      // and then after finding, push us in there!  
 
       $.post("/api/friends", info,
         function (data) {
-          // Clear the form when submitting
-          $("#name").val("");
-          $("#urlPhoto").val("");
+
 
           // analyze resulting data
           console.log("-------> ", data)
           if (data['result'] == true) {
             console.log(data['name'], data['photo'])
+            // fill in the data for the modal
             $("#friendPhoto").attr("src", data['photo'])
             $("#friendName").html(data['name'])
+
+            // clear entries in the questionaire out for next friend
+            $("#name").val("");
+            $("#urlPhoto").val("");
+  
+            for (let i = 1; i < 11; i++) {
+              idName = "#q" + i
+              $(idName).val("")
+            }
+
+            // show the modal!
             $('#friendResult').modal('show');
           } else {
+            // this will only happen if the list is blank
+            // which won't ever happen
             alert("Sorry, no matches!");
           }
         });
 
-
-    }
+    } // exits the else statement for the say "page incomplete" or "post and get results in modal!"
 
 
   });

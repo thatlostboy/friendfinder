@@ -12,7 +12,7 @@ var friendsArray = [
     },     
     {
         name: "hot girl",
-        photo: "https://media1.giphy.com/media/nqO46lkGROwiA/giphy.gif",
+        photo: "https://media.giphy.com/media/njqtXo391qcVy/giphy.gif",
         scores: [5,5,5,5,5,5,5,5,5,5]
     }
 ]
